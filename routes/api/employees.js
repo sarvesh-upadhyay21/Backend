@@ -4,12 +4,12 @@ const employeesController = require('../../middleware/employeesController.js');
 // const
 
 router.route('/')
-.get(employeesController.getAllEmployees)
-.post(employeesController.createNewEmployee)
-.put(employeesController.updateEmployee)
-.delete(employeesController.deleteEmployee);
+    .get(employeesController.getAllEmployees)
+    .post(employeesController.createNewEmployee)
+    .put(employeesController.updateEmployee)
+    .delete(employeesController.deleteEmployee);
 
 router.route('/:id')
-.get(employeesController.getEmployee);
+    .get(employeesController.getEmployee);
 
 module.exports = router;
