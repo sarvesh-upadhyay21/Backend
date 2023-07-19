@@ -15,7 +15,7 @@ const connectDB = require('./config/dbConn.js');
 const PORT = process.env.PORT || 5001;
 const root = require('./routes/root.js');
 const employees = require('./routes/Api/employees.js');
-const product = require('./routes/Api/product.js');
+const product = require('./routes/Api/products.js');
 const ngrokOptions = {
     addr: 5001,
     authtoken: process.env.NGROK_TOKEN,
@@ -36,12 +36,14 @@ app.use('/', express.static(path.join(__dirname, './Images')));
 // Routes
 app.use('/', root);
 app.use('/employee', employees);
+
+app.use('/product', product);
+
 app.use('/check-image', (req, res) => {
     // res.send('Hello world');
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
     // res.sendFile(path.join(__dirname, 'Images', 'b49658ba697e0f73b00f13dd8ede2c95.jpeg'));
 });
-app.use('/product', product);
 
 app.all("*", (req, res) => {
     res.status(404);
@@ -59,13 +61,13 @@ app.all("*", (req, res) => {
 
 app.use(errorHandler);
 
-mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB');
-    (async function () {
-        const url = await ngrok.connect(ngrokOptions);
-        console.log('Live : ', url);
-    })();
-    app.listen(PORT, () => console.log(`Server running on port ${ PORT }`));
-});
+// mongoose.connection.once('open', () => {
+//     console.log('Connected to MongoDB');
+//     (async function () {
+//         const url = await ngrok.connect(ngrokOptions);
+//         console.log('Live : ', url);
+//     })();
+//     app.listen(PORT, () => console.log(`Server running on port ${ PORT }`));
+// });
 
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${ PORT }`));
