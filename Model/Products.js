@@ -13,7 +13,8 @@ const ProductSchema = new Schema({
     },
     description: {
         type: String,
-        default: "No Description",
+        required: true,
+        // default: "No Description",
         // trim: true
     },
     price: {
@@ -28,7 +29,6 @@ const ProductSchema = new Schema({
     rating: {
         type: Number,
         required: true,
-        default: 3.5
     },
     stock: {
         type: Number
@@ -41,15 +41,11 @@ const ProductSchema = new Schema({
     },
     thumbnail: {
         type: String,
-        required: true
+        // required: true
     },
-    images: [
-        {
-            url: {
-                type: String
-            }
-
-        }
-    ]
+    images: {
+        data: Buffer,
+        contentType: String
+    }
 });
-module.exports = mongoose.model("Users", ProductSchema);
+module.exports = mongoose.model("Products", ProductSchema);

@@ -37,7 +37,7 @@ app.use('/', express.static(path.join(__dirname, './Images')));
 app.use('/', root);
 app.use('/employee', employees);
 
-app.use('/product', product);
+app.use('/products', product);
 
 app.use('/check-image', (req, res) => {
     // res.send('Hello world');
